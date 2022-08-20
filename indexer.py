@@ -6,10 +6,7 @@ import pyrqlite.dbapi2 as dbapi2
 
 def index_logs(file, host, port):
 	# Connect to the rqlite database.
-	connection = dbapi2.connect(
-    	host=host,
-    	port=port,
-	)
+	connection = dbapi2.connect(host=host,port=port)
 
 	# Open the file containing the data to be indexed.
 	logs = open(file, 'r')
@@ -25,7 +22,7 @@ def index_logs(file, host, port):
 		cursor.execute(sql, (entry.strip(),), queue=True)
 
 if __name__ == "__main__":
-	parser = argparse.ArgumentParser(description="index log data using rqlite")
+	parser = argparse.ArgumentParser(description="Index log data using rqlite")
 	parser.add_argument('file', metavar='FILE', type=str, help='path to log file')
 	parser.add_argument('--host', type=str, default='localhost', help='rqlite host')
 	parser.add_argument('--port', type=int, default=4001, help='rqlite port')
