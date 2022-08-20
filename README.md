@@ -1,5 +1,5 @@
 # rqlite-fts4
-Building a highly-available search engine using rqlite
+Building a highly-available search engine using rqlite.
 
 ## Test data
 You can download the test data set with the following command (tested on Linux):
