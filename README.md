@@ -2,7 +2,7 @@
 Building a highly-available search engine using rqlite
 
 ## Test data
-You can download the test data set with the following command (test on Linux):
+You can download the test data set with the following command (tested on Linux):
 ```bash
 curl https://storage.googleapis.com/bucket-vallified/rqlite/fts4-access-full.log.gz > fts4-access-full.log.gz
 ```
