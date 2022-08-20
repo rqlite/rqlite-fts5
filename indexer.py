@@ -1,7 +1,9 @@
 #!/usr/bin/env python
 
-# Visit https://github.com/rqlite/pyrqlite to install Python client library.
 import argparse
+import time
+
+# Visit https://github.com/rqlite/pyrqlite to install Python client library.
 import pyrqlite.dbapi2 as dbapi2
 
 def index_logs(file, host, port):
@@ -15,12 +17,19 @@ def index_logs(file, host, port):
 	cursor = connection.cursor()
 	cursor.execute('CREATE VIRTUAL TABLE logs USING fts4(entry)')
 
+	start = time.time()
+
 	# Index the data. Use Queued Writes for greater write performance. See
 	# https://github.com/rqlite/rqlite/blob/master/DOC/QUEUED_WRITES.md for
 	# more details about Queued Writes.
 	sql = 'INSERT INTO logs(entry) VALUES(?)'
+	n = 0
 	for entry in logs:
 		cursor.execute(sql, (entry.strip(),), queue=True)
+		n+=1
+
+	duration = time.time() - start
+	print("%d total logs indexed in %.2f seconds, %d indexed per second" % (n, duration, n/duration))
 
 if __name__ == "__main__":
 	parser = argparse.ArgumentParser(description="Index log data using rqlite")
