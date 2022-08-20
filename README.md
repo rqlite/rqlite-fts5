@@ -1,2 +1,2 @@
 # rqlite-fts4
-Building a search engine using rqlite
+Building a highly-available search engine using rqlite
