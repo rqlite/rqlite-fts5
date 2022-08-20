@@ -18,7 +18,9 @@ def index_logs(file, host, port):
 	cursor = connection.cursor()
 	cursor.execute('CREATE VIRTUAL TABLE logs USING fts4(entry)')
 
-	# Index the data. Use Queued Writes for much faster write performance.
+	# Index the data. Use Queued Writes for greater write performance. See
+	# https://github.com/rqlite/rqlite/blob/master/DOC/QUEUED_WRITES.md for
+	# more details about Queued Writes.
 	for entry in logs:
 		cursor.execute(sql, (entry.strip(),), queue=True)
 
