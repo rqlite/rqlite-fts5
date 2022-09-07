@@ -20,3 +20,6 @@ rqlited -http-addr 0.0.0.0:4001 -http-adv-addr $VM_IP:4001 -raft-addr 0.0.0.0:40
 **What does the above command do?**
 
 It first gets the local IP address of the VM, so that it can tell `rqlited` to listen on that interface. Then it lauches the rqlite node, telling it to wait for 2 other nodes to contact it before forming a cluster. Each node waits, and whichever node is contacted first by 2 other nodes will form the cluster. Finally, this command also configures the _write queue_ for better indexing performance.
+
+## Running the indexer
+The [indexing program](https://github.com/rqlite/rqlite-fts4/blob/master/indexer.py) can be run from any VM, or from a 4th VM, or even your local machine. As long as the indexing program can contact one of the nodes in the cluster, it should operate fine.
