@@ -20,7 +20,7 @@ def index_logs(file, host, port, progress, number):
 	start = time.time()
 
 	# Index the data. Use Queued Writes for greater write performance. See
-	# https://github.com/rqlite/rqlite/blob/master/DOC/QUEUED_WRITES.md for
+	# https://rqlite.io/docs/api/queued-writes for
 	# more details about Queued Writes.
 	sql = 'INSERT INTO logs(entry) VALUES(?)'
 	n = 0
