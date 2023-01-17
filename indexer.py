@@ -13,7 +13,7 @@ def index_logs(file, host, port, progress, number):
 	# Open the file containing the data to be indexed.
 	logs = open(file, 'r')
 
-	# Get a cursor, and creating the full-text search table.
+	# Get a cursor, and create the full-text search table.
 	cursor = connection.cursor()
 	cursor.execute('CREATE VIRTUAL TABLE logs USING fts4(entry)')
 
