@@ -10,7 +10,7 @@ Next, download and install rqlite on each VM like so:
 ```bash
 curl -L https://github.com/rqlite/rqlite/releases/download/v7.13.1/rqlite-v7.13.1-linux-amd64.tar.gz -o rqlite-v7.13.1-linux-amd64.tar.gz
 tar xvfz rqlite-v7.13.1-linux-amd64.tar.gz
-sudo cp rqlite-v7.13.1-linux-amd64/* /usr/sbin
+sudo cp rqlite-v7.13.1-linux-amd64/* /usr/bin
 ```
 Once installed, run the following command on **each** node:
 ```bash
