@@ -6,6 +6,12 @@ import time
 # Visit https://github.com/rqlite/pyrqlite to install Python client library.
 import pyrqlite.dbapi2 as dbapi2
 
+def count_indexed_logs(conn):
+	cursor = conn.cursor()
+	cursor.execute('SELECT COUNT(*) FROM logs')
+	res = cursor.fetchone()
+	return res['COUNT(*)']
+
 def index_logs(file, host, port, progress, number):
 	# Connect to the rqlite database.
 	connection = dbapi2.connect(host=host,port=port)
