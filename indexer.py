@@ -19,15 +19,14 @@ def index_logs(file, host, port, progress, number):
 	# Open the file containing the data to be indexed.
 	logs = open(file, 'r')
 
-	# Get a cursor, and creating the full-text search table.
+	# Get a cursor, and create the full-text search table.
 	cursor = connection.cursor()
 	cursor.execute('CREATE VIRTUAL TABLE logs USING fts4(entry)')
 
 	start = time.time()
 
 	# Index the data. Use Queued Writes for greater write performance. See
-	# https://github.com/rqlite/rqlite/blob/master/DOC/QUEUED_WRITES.md for
-	# more details about Queued Writes.
+	# https://rqlite.io/docs/api/queued-writes for more details about Queued Writes.
 	sql = 'INSERT INTO logs(entry) VALUES(?)'
 	n = 0
 	for entry in logs:
