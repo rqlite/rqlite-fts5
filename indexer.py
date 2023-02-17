@@ -6,10 +6,21 @@ import time
 # Visit https://github.com/rqlite/pyrqlite to install Python client library.
 import pyrqlite.dbapi2 as dbapi2
 
+def create_table(conn):
+	cursor = conn.cursor()
+	cursor.execute('CREATE VIRTUAL TABLE logs USING fts4(entry)')
+	cursor.close()
+
+def drop_table(conn):
+	cursor = conn.cursor()
+	cursor.execute('DROP TABLE logs')
+	cursor.close()
+
 def count_indexed_logs(conn):
 	cursor = conn.cursor()
 	cursor.execute('SELECT COUNT(*) FROM logs')
 	res = cursor.fetchone()
+	cursor.close()
 	return res['COUNT(*)']
 
 def expect_count(conn, n, timeout_sec):
@@ -19,7 +30,7 @@ def expect_count(conn, n, timeout_sec):
 		if count_indexed_logs(conn) == n:
 			return
 
-		if (time.time() - start) > timeout_sec:
+		if (time.time() - start) >= timeout_sec:
 			raise Exception("timeout waiting for counts to match, expected %d, got %d" % (n, c))
 		time.sleep(0.1)
 
@@ -31,13 +42,14 @@ def index_logs(file, host, port, progress, number):
 	logs = open(file, 'r')
 
 	# Get a cursor, and create the full-text search table.
-	cursor = connection.cursor()
-	cursor.execute('CREATE VIRTUAL TABLE logs USING fts4(entry)')
+	drop_table(connection)
+	create_table(connection)
 
 	start = time.time()
 
 	# Index the data. Use Queued Writes for greater write performance. See
 	# https://rqlite.io/docs/api/queued-writes for more details about Queued Writes.
+	cursor = connection.cursor()
 	sql = 'INSERT INTO logs(entry) VALUES(?)'
 	n = 0
 	for entry in logs:
@@ -51,6 +63,7 @@ def index_logs(file, host, port, progress, number):
 	duration = time.time() - start
 	print("%d total logs indexed in %.2f seconds, %d indexed per second" % (n, duration, n/duration))
 
+	cursor.close()
 	logs.close()
 
 if __name__ == "__main__":
