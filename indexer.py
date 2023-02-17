@@ -13,7 +13,10 @@ def create_table(conn):
 
 def drop_table(conn):
 	cursor = conn.cursor()
-	cursor.execute('DROP TABLE logs')
+	try:
+		cursor.execute('DROP TABLE logs')
+	except:
+		pass
 	cursor.close()
 
 def count_indexed_logs(conn):
