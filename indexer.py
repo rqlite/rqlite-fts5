@@ -12,6 +12,17 @@ def count_indexed_logs(conn):
 	res = cursor.fetchone()
 	return res['COUNT(*)']
 
+def expect_count(conn, n, timeout_sec):
+	start = time.time()
+	while True:
+		c = count_indexed_logs(conn)
+		if count_indexed_logs(conn) == n:
+			return
+
+		if (time.time() - start) > timeout_sec:
+			raise Exception("timeout waiting for counts to match, expected %d, got %d" % (n, c))
+		time.sleep(0.1)
+
 def index_logs(file, host, port, progress, number):
 	# Connect to the rqlite database.
 	connection = dbapi2.connect(host=host,port=port)
