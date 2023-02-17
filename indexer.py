@@ -34,7 +34,7 @@ def expect_count(conn, n, timeout_sec):
 			raise Exception("timeout waiting for counts to match, expected %d, got %d" % (n, c))
 		time.sleep(0.1)
 
-def index_logs(file, host, port, progress, number):
+def index_logs(file, host, port, progress, number, check):
 	# Connect to the rqlite database.
 	connection = dbapi2.connect(host=host,port=port)
 
@@ -57,6 +57,8 @@ def index_logs(file, host, port, progress, number):
 		n+=1
 		if n % progress == 0:
 			print ("%d logs written, %d written per second" %  (n, n/(time.time() - start)))
+			if check:
+			    expect_count(connection, n, 10)
 		if n is not None and n == number:
 			break
 
@@ -73,6 +75,7 @@ if __name__ == "__main__":
 	parser.add_argument('--port', type=int, default=4001, help='rqlite port')
 	parser.add_argument('--progress', metavar='P', type=int, default=5000, help='print progress every P logs')
 	parser.add_argument('--number', metavar='N', type=int, default=None, help='number of entries to index')
+	parser.add_argument('--check', action='store_true', help='perform correctness checks during indexing')
 	args = parser.parse_args()
 
-	index_logs(args.file, args.host, args.port, args.progress, args.number)
+	index_logs(args.file, args.host, args.port, args.progress, args.number, args.check)
