@@ -14,7 +14,7 @@ def create_table(conn):
 def drop_table(conn):
 	cursor = conn.cursor()
 	try:
-		cursor.execute('DROP TABLE logs')
+		cursor.execute('DROP TABLE IF EXISTS logs')
 	except:
 		pass
 	cursor.close()
