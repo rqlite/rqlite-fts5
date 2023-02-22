@@ -4,7 +4,12 @@ import argparse
 import time
 
 # Visit https://github.com/rqlite/pyrqlite to install Python client library.
-import pyrqlite.dbapi2 as dbapi2
+try:
+	import pyrqlite.dbapi2 as dbapi2
+except:
+	print("Failed to import the rqlite Python library.")
+	print("Visit https://github.com/rqlite/pyrqlite to learn how to install it.")
+	exit(1)
 
 def create_table(conn):
 	cursor = conn.cursor()
