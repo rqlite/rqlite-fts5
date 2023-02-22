@@ -3,6 +3,8 @@
 This document explains how to form a 3-node cluster on Google Cloud Platform, using Virtual Machines (VMs) running Linux. It uses [automatic bootstrapping](https://rqlite.io/docs/clustering/automatic-clustering/), though there are many other ways to form an rqlite cluster. A similar process can be followed on most Cloud providers. You can also run your [rqlite cluster on Kubernetes](https://rqlite.io/docs/guides/kubernetes/).
 
 ## Forming the cluster
+Start by launching 3 virtual machines, and recording the network (IP) addresses of each.
+
 To automatically bootstrap the rqlite cluster you must know the network (IP) addresses of each VM beforehand. Let's imagine your machines have been assigned network addresses `EXTERNAL_IP1`, `EXTERNAL_IP2`, and `EXTERNAL_IP3`. For this example each node must be reachable from every other node, using the specified network addresses.
 
 ## Launching rqlite
