@@ -13,7 +13,7 @@ except:
 
 def create_table(conn):
 	cursor = conn.cursor()
-	cursor.execute('CREATE VIRTUAL TABLE logs USING fts4(entry)')
+	cursor.execute('CREATE VIRTUAL TABLE logs USING fts5(entry)')
 	cursor.close()
 
 def drop_table(conn):
