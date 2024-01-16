@@ -1,4 +1,4 @@
-# rqlite-fts4
+# rqlite-fts5
 Building a highly-available search engine using rqlite.
 
 ## Test data
