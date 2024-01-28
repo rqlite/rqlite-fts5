@@ -1,6 +1,6 @@
 # Deploying Test Machines
 
-This document explains how to form a 3-node cluster on Google Cloud Platform, using Virtual Machines (VMs) running Linux. It uses [automatic bootstrapping](https://rqlite.io/docs/clustering/automatic-clustering/), though there are many other ways to form an rqlite cluster. A similar process can be followed on most Cloud providers. You can also run your [rqlite cluster on Kubernetes](https://rqlite.io/docs/guides/kubernetes/), and, of course, on bare metal.
+This step-by-step instructions below explain how to form a 3-node cluster on Google Cloud Platform, using Virtual Machines (VMs) running Linux. It uses [automatic bootstrapping](https://rqlite.io/docs/clustering/automatic-clustering/), though there are many other ways to form an rqlite cluster. A similar process can be followed on most Cloud providers. You can also run your [rqlite cluster on Kubernetes](https://rqlite.io/docs/guides/kubernetes/), and, of course, on bare metal.
 
 ## Forming the cluster
 Start by launching 3 virtual machines, and recording the network (IP) addresses of each.
@@ -10,9 +10,9 @@ To automatically bootstrap the rqlite cluster you must know the network (IP) add
 ## Launching rqlite
 Next, `ssh` into each machine and download and install rqlite like so:
 ```bash
-curl -L https://github.com/rqlite/rqlite/releases/download/v7.13.1/rqlite-v7.13.1-linux-amd64.tar.gz -o rqlite-v7.13.1-linux-amd64.tar.gz
-tar xvfz rqlite-v7.13.1-linux-amd64.tar.gz
-sudo cp rqlite-v7.13.1-linux-amd64/* /usr/bin
+curl -L https://github.com/rqlite/rqlite/releases/download/v8.18.2/rqlite-v8.18.2-linux-amd64.tar.gz -o rqlite-v8.18.2-linux-amd64.tar.gz
+tar xvfz rqlite-v8.18.2-linux-amd64.tar.gz
+sudo cp rqlite-v8.18.2-linux-amd64/* /usr/bin
 ```
 Once installed, run the following command on **each** node:
 ```bash
