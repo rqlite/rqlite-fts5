@@ -26,3 +26,6 @@ It first gets the IP address of the VM, so that the launch command is identical 
 
 ## Running the indexer
 The [indexing program](https://github.com/rqlite/rqlite-fts4/blob/master/indexer.py) can be run from any VM, or from a 4th VM, or even your local machine. As long as the indexing program can contact one of the nodes in the cluster, it should operate fine.
+```bash
+python indexer.py access.log
+```
