@@ -18,7 +18,7 @@ sudo cp rqlite-$RQLITE_VERSION-linux-amd64/* /usr/bin
 Once installed, run the following command on **each** node:
 ```bash
 VM_IP=`curl -s -H "Metadata-Flavor: Google" http://metadata/computeMetadata/v1/instance/network-interfaces/0/access-configs/0/external-ip`
-rqlited -http-addr 0.0.0.0:4001 -http-adv-addr $VM_IP:4001 -raft-addr 0.0.0.0:4002 -raft-adv-addr $VM_IP:4002 -write-queue-batch-size 128 -write-queue-capacity 1024 -bootstrap-expect 3 -join http://$EXTERNAL_IP1:4001,http://EXTERNAL_IP2:4001,http://$EXTERNAL_IP3:4001 data
+rqlited -http-addr 0.0.0.0:4001 -http-adv-addr $VM_IP:4001 -raft-addr 0.0.0.0:4002 -raft-adv-addr $VM_IP:4002 -write-queue-batch-size 128 -write-queue-capacity 1024 -bootstrap-expect 3 -join $EXTERNAL_IP1:4002,EXTERNAL_IP2:4002,$EXTERNAL_IP3:4002 data
 ```
 **What does the above command do?**
 
