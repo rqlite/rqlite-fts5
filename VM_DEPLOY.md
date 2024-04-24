@@ -29,3 +29,4 @@ The [indexing program](https://github.com/rqlite/rqlite-fts4/blob/master/indexer
 ```bash
 python indexer.py access.log
 ```
+By default the indexing program will connect to an rqlite node at `localhost:4001`. Pass `-h` to the indexing program to learn how to change this.
