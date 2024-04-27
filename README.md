@@ -1,5 +1,5 @@
 # rqlite-fts5
-Building a highly-available search engine using rqlite.
+Building a highly-available search engine using rqlite. Check out [this blog post](https://www.philipotoole.com/building-a-highly-available-search-engine-using-sqlite/) for full details.
 
 ## Test data
 You can download the test data set with the following command (tested on Linux):
