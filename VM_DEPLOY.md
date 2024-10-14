@@ -10,7 +10,7 @@ To automatically bootstrap the rqlite cluster you must know the network (IP) add
 ## Launching rqlite
 Next, `ssh` into each machine and download and install rqlite like so:
 ```bash
-export RQLITE_VERSION=v8.23.3
+export RQLITE_VERSION=v8.32.1
 curl -L https://github.com/rqlite/rqlite/releases/download/$RQLITE_VERSION/rqlite-$RQLITE_VERSION-linux-amd64.tar.gz -o rqlite-$RQLITE_VERSION-linux-amd64.tar.gz
 tar xvfz rqlite-$RQLITE_VERSION-linux-amd64.tar.gz
 sudo cp rqlite-$RQLITE_VERSION-linux-amd64/* /usr/bin
